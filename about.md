@@ -9,7 +9,9 @@ I run this small website in French and English to share some personal experience
 
 ### More Information
 
-I am currently not open to new professional opportunities, but fel free to try your luck on LinkedIn if you believe you have the 1-in-a-million offer. For now, I run a small freelance structure together with my brother Clément, we provide technical consulting and organization for competitions of any kind.
+I am currently not open to new professional opportunities, but feel free to try your luck on LinkedIn if you believe you have the 1-in-a-million offer.
+
+For now, I run a small freelance structure together with my brother Clément, we provide technical consulting and organization for competitions of any kind.
 
 ### Contact me
 
