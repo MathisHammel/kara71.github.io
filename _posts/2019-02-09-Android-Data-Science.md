@@ -3,13 +3,13 @@ layout: post
 title: Android Reverse Engineering for Data Science
 ---
 
-Almost a year ago I started using an app called "Too Good To Go" (this article is not sponsored!). Its goal is to reduce food waste by allowing stores from all around Europe to sell their unsold products to the app users at a very small price. You usually pay 20 to 50% of the retail price, but the products have very short dates and you don't know in advance what you will get.
+Almost a year ago I started using an app called "Too Good To Go" (this article is not sponsored!). Its goal is to reduce food waste by allowing stores from all around Europe to sell their unsold products to the app users at a very small price. You usually pay 20 to 50% of the retail price, but the products have very short expiration dates and you don't know what you will get beforehand.
 
 ![img app1]({{ site.baseurl }}/images/2019-02-tgtg/app1.png) ![img app2]({{ site.baseurl }}/images/2019-02-tgtg/app2.png) ![img app3]({{ site.baseurl }}/images/2019-02-tgtg/app3.png)
 
-I absolutely love the app (still not sponsored, but @toogoodtogo feel free to slide in those DMs) to get fancy stuff at a very low price, or to challenge my cooking creativity getting random food from my local grocery store.
+I absolutely love the app (still not sponsored, but @toogoodtogo feel free to slide in those DMs) to get fancy stuff at a very low price, or to challenge my cooking creativity by getting random food from my local grocery store.
 
-The only issue is that demand is always higher than supply on high-quality stores, so it's quite challenging to buy at the right time where a store just restocked and there is still stock available. On the most hyped stores, stock typically lasts less than 10 minutes after restock.
+The only issue is that demand is always higher than supply on high-quality stores, so it's quite challenging to buy at the right time when a store just restocked and there is still stock available. On the most hyped stores, stock typically lasts less than 10 minutes after restock.
 
 Until a few weeks ago, stores in France could only sell for the same day, which meant that next-day restocks were only taken into account at midnight. I only had to set an alarm and got my packages every time. However, a recent change made it possible for stores to restock for the next day, which means that restocks can now happen pretty much anytime and are much harder to predict.
 
@@ -48,7 +48,7 @@ One way would be to find the string containing the URL, and finding all referenc
 
 ![img jadx7]({{ site.baseurl }}/images/2019-02-tgtg/jadx7.png)
 
-Owning this list of endpoints is cool but not very useful : the server often expects us to send parameters to the API (search criteria, user credentials, GPS position, etc.) but these query parameters are nowhere to be found in the source code related to these endpoints. This means there must be somewhere else the endpoints are generated. After a few more searches, we finally get it : a few lines of code where endpoints are actually called with all the query parameters needed !
+Owning this list of endpoints is cool but not very useful : the server often expects us to send parameters to the API (search criteria, user credentials, GPS position, etc.) but these query parameters are nowhere to be found in the source code related to these endpoints. This means the endpoints must be generated somewhere else. After a few more searches, we finally get it : a few lines of code where endpoints are actually called with all the query parameters needed !
 
 ![img jadx8]({{ site.baseurl }}/images/2019-02-tgtg/jadx8.png)
 
