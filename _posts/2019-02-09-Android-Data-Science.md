@@ -22,7 +22,7 @@ Having not found any hints about any endpoints online, we have to get dirty and 
 
 After downloading the .apk (Android package) file corresponding to the app, let's load it into a visual decompiler for Android called JADX.
 
-![img jadx1]({{ site.baseurl }}/images/2019-02-tgtg/jadx1.png)
+![img jadx]({{ site.baseurl }}/images/2019-02-tgtg/jadx.png)
 
 We know that the app is inside package com.app.tgtg (it's also Google Play Store's internal identifier), so we can take a look at the class hierarchy and see if something API-related comes up.
 
