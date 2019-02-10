@@ -3,7 +3,7 @@ layout: post
 title: Android Reverse Engineering for Data Science
 ---
 
-Almost a year ago I started using an app called "Too Good To Go" (I'm not sponsored) which goal is to reduce food waste by allowing stores from all around Europe to sell their unsold products to the app users at a very small price. You usually pay 10 to 25% of the retail price, but the products have very short dates and you don't know in advance what you will get.
+Almost a year ago I started using an app called "Too Good To Go" (this article is not sponsored!). Its goal is to reduce food waste by allowing stores from all around Europe to sell their unsold products to the app users at a very small price. You usually pay 20 to 50% of the retail price, but the products have very short dates and you don't know in advance what you will get.
 
 ![img app1]({{ site.baseurl }}/images/2019-02-tgtg/app1.png) ![img app2]({{ site.baseurl }}/images/2019-02-tgtg/app2.png) ![img app3]({{ site.baseurl }}/images/2019-02-tgtg/app3.png)
 
@@ -13,7 +13,7 @@ The only issue is that demand is always higher than supply on high-quality store
 
 Until a few weeks ago, stores in France could only sell for the same day, which meant that next-day restocks were only taken into account at midnight. I only had to set an alarm and got my packages every time. However, a recent change made it possible for stores to restock for the next day, which means that restocks can now happen pretty much anytime and are much harder to predict.
 
-Instead of being one of those normies constantly watching the application for new offers on the best stores, I decided to put my degree to good use and automate it. Also, there are never enough open datasets in the world, so I decided to have one for myself and have some fun with it :)
+Instead of being one of those normal people constantly watching the application for new offers on the best stores, I decided to put my degree to good use and automate it. Also, there are never enough open datasets in the world, so I decided to have one for myself and have some fun with it :)
 ## First step - Find the API
 
 Apps usually communicate with servers through an API. By communicating with the backend through such an API, we can divert the stream of useful data for our own use. The first reflex is to search for a public API for the product, but there isn't one.
@@ -169,6 +169,9 @@ We're done playing with all these useless (but interesting) visualizations, cong
 | 28 | Comptoir Veggie | 3156 | France |
 | 29 | Focacceria | 3128 | Norway |
 | 30 | Lenôtre Bastille | 3115 | France |
+
+---
+
 
 | Rank    | Store    | Likes |
 | ------- | --------- | ------------------ |
