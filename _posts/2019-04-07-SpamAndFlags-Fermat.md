@@ -3,8 +3,6 @@ layout: post
 title: SpamAndFlags CTF Writeup - Fermat's Last Theorem
 ---
 
-## Introduction
-
 This weekend, I played SpamAndFlags CTF Teaser 2019, which was a very interesting CTF. I didn't play for too long, having another CTF and the Google Code Jam quals at the same time, but there was a particular task that I immediately fell in love with : the goal was to find a counter-example to Fermat's last theorem in order to get a flag.
 
 Fermat's last theorem states that there are no x,y,z > 1 and n > 3 such that a^n + b^n = c^n. This famous conjecture made by Pierre de Fermat around year 1630 was proven to be true by Andrew Wiles in 1994.
@@ -113,7 +111,9 @@ $ ./calc
 6195341542 * 2977518503 = 10
 ```
 
-Wait, what just happened ??? In the last example, we witnessed an integer overflow. It happens when a number is too large for the size allocated to it, so the bits to the left are discarded. Let's have a detailed look at what happened.
+Wait, what just happened ???
+
+In the last example, we witnessed an integer overflow. It happens when a number is too large for the size allocated to it, so the bits to the left are discarded. Let's have a detailed look at what happened.
 
 Remember that our `long long` integers have 64 bits to work with ? That's usually plenty of memory to work with, but it's sometimes not enough. The result of 6195341542 * 2977518503 should be 18446744073709551626, which is just a little more than 64 bits can hold.
 
@@ -135,7 +135,7 @@ Some languages such as Python make the developer's life almost too easy by using
 
 This challenge implements some protection against integer overflows : for multiplication and addition, it checks that the result is not less than the first operand. If we tried to use 6195341542 * 2977518503 in the function safe_mul, the program would detect the overflow since 10 < 6195341542.
 
-However, this protection is not perfect. For instance, computing 4 * 4611686018427387914 with `long long`s, the result is 40. Since the result is higher than the first operand, the execution continue normally and we have proven a flaw in the overflow detection.
+However, this protection is not perfect. For instance, computing 4 * 4611686018427387914 with `long long` integers, the result is 40. Since the result is higher than the first operand, the execution continues normally and we have proven a flaw in the overflow detection.
 
 The exponentiation is implemented as the square-and-multiply algorithm, which uses only log(N) multiplication operations to compute a number to the power N, instead of N multiplications with a naive algorithm. This is nice because it means less verifications against overflows.
 
@@ -191,7 +191,13 @@ The leftmost bit does not fit in the 64 bits allocated, so it is discarded. This
 
 We end up with an interesting result, which is that (2^33 + 1) ^ 2 = (2^34 + 1) when it overflows. This property is global : we have (2^N + 1) ^ 2 = (2^(N+1) + 1), given that N ≥ 32 (otherwise the result is too small and the overflow doesn't happen) and N < 63 (otherwise the middle bit also overflows).
 
-Recursively, we also have (2^N + 1) ^ 4 = (2^(N+2) + 1), (2^N + 1) ^ 8 = (2^(N+3) + 1), and so on.
+Recursively, we also have
+
+(2^N + 1) ^ 4 = (2^(N+2) + 1)
+
+(2^N + 1) ^ 8 = (2^(N+3) + 1)
+
+and so on.
 
 ### Closing the deal
 
@@ -210,6 +216,6 @@ $ nc 35.195.26.244 1337
 SaF{You_should_have_been_faster!_https://etherscan.io/tx/0x4249377e6f654d6c814c2ae1390a60e5133b68ce772c7e04ee7644972e56d9e5}
 ```
 
-And there we get the flag ! In real time, it took me around 30 minutes to solve this challenge, which I'm really proud of. My actual solution involved less mathematical analysis and more bruteforcing than this article shows, but the idea was the same :)
+And there we get the flag ! It took me around 30 minutes to solve this challenge, which is a time I'm really proud of. My actual solution involved less mathematical analysis and more bruteforcing than this article shows, but the idea was the same :)
 
 With only this flag after 10 hours of competition, my team took 6th place in the CTF, and slowly moved down to 16th place as other teams got more flags.
