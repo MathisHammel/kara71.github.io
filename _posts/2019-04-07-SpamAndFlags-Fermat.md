@@ -5,9 +5,9 @@ title: SpamAndFlags CTF Writeup - Fermat's Last Theorem
 
 This weekend, I played SpamAndFlags CTF Teaser 2019, which was a very interesting CTF. I didn't play for too long, having another CTF and the Google Code Jam quals at the same time, but there was a particular task that I immediately fell in love with : the goal was to find a counter-example to Fermat's last theorem in order to get a flag.
 
-Fermat's last theorem states that there are no x,y,z > 1 and n > 3 such that a^n + b^n = c^n. This famous conjecture made by Pierre de Fermat around year 1630 was proven to be true by Andrew Wiles in 1994.
+Fermat's last theorem states that there are no x,y,z > 0 and n > 3 such that a^n + b^n = c^n. This famous conjecture made by Pierre de Fermat around year 1630 was proven to be true by Andrew Wiles in 1994.
 
-Of course, we are not asked to find a counter-example in the general case, which would of course be impossible. The checker is flawed, and we have to find an example that the checker accepts.
+We are not asked to find a counter-example in the general case, which would obviously be impossible. The checker is flawed, and we have to find an example that the checker accepts.
 
 ```c
 #include <stdio.h>
@@ -75,7 +75,7 @@ int main(void)
 
 The flaw lies in the fact that C uses fixed-size numbers. Here, all variables are of type `long long` which have to be *at least* 64 bits long according to the C specification, but it's safe to assume here that the compiler will make it exactly 64 bits, not more.
 
-If you are not aware of the main issue with fixed-size integers, let's demonstrate with a small multiplication calculator :
+In case you are not aware of the main issue with fixed-size integers, let's demonstrate with a small multiplication calculator :
 
 ```c
 #include <stdio.h>
@@ -127,7 +127,7 @@ These numbers are 33 and 32 bits long, so the result has 65 bits :
 
 Do you see that 65th bit all the way to the left ? It doesn't fit in the 64 bits allocated to the result, so the CPU just gets rid of it. All that's left is 1010 in binary, which translates to 10 in decimal. So this explains why the result is only 10 whereas we multiplied two large numbers together.
 
-This is different from a buffer overflow, where the computer writes a string of bytes in a memory section which is too small to contain it. In that case, the overflowing data is still written and can be exploited to overwrite another memory section. In the case of integer overflows, leftover bits are simply ignored.
+This is different from a buffer overflow, where the computer writes a string of bytes in a memory section which is too small to contain it. With buffer overflows, the overflowing data is still written and can be exploited to overwrite another memory section. In the case of integer overflows, leftover bits are simply ignored.
 
 Some languages such as Python make the developer's life almost too easy by using arbitrary length integers, where the number of bits allocated is dynamic and integer overflows can't happen.
 
@@ -143,7 +143,7 @@ The exponentiation is implemented as the square-and-multiply algorithm, which us
 
 ### Birthday attack
 
-My first idea for the challenge was to pick a power N, and then compute random numbers to the power N until a collision is found. This is similar to a cryptographic birthday attack which is somehow feasible when working with 64 bits. However, the protection against overflows makes it harder to find valid powers, which I could probably ignore if I hadn't such a toaster PC to work with :)
+My first idea for the challenge was to pick a power N, and then compute random numbers to the power N until a working triplet is found. If we do it like a cryptographic birthday attack, this would somehow be feasible given we only have 64 bits. However, the protection against overflows makes it harder to find valid powers, which I could probably overcome if I hadn't such a toaster PC to work with :)
 
 We need to get smarter. Let's get into some math and binary operations.
 
@@ -157,11 +157,11 @@ Now this result isn't easy to come by if you're not familiar with binary operati
 
 ![decomp0]({{ site.baseurl }}/images/2019-04-spamandflags/decomp0.png)
 
-Then, we use distributivity of multiplication over the addition. This is the complicated term which says (a + b + c + d) * x = a*x + b*x + c*x + d*x.
+Then, we use the *distributivity of multiplication over the addition*. This is a complicated term which means (a + b + c + d) * x = a*x + b*x + c*x + d*x.
 
 ![distrib0]({{ site.baseurl }}/images/2019-04-spamandflags/distrib0.png)
 
-We now have 4 terms to compute and add together. The fourth term is trivial to compute, and the others aren't too hard either : in the same way you can multiply 156246 * 1000 = 156246000, you can multiply any binary number by a power of two by adding the right amount of zeros to its right. In binary arithmetics, it is more common to see it as "shifting the number to the left" instead of "adding zeros to the right", but it's really the same thing.
+We now have 4 terms to compute and add together. The fourth term is trivial to compute, and the others aren't too hard either : in the same way you can multiply 156246 * 1000 = 156246000, you can multiply any binary number by a power of two by adding the right amount of zeros to its right. In binary arithmetic, it is more common to see it as "shifting the number to the left" instead of "adding zeros to the right", but it's really the same thing.
 
 When all four terms have been computed, we add them together through simple binary addition which I won't detail :
 
@@ -171,7 +171,7 @@ You will notice that this multiplication algorithm is strangely similar to the m
 
 ### Smart Fermat collisions
 
-As we have seen in the previous example, the result of binary multiplications can quickly become "unpredictable", especially when we do several rounds of multiplication in a row, as is the case when raising to the Nth power.
+As we have seen in the previous example, the patterns of 1s and 0s in the result of binary multiplications can quickly become "unpredictable", especially when we do several rounds of multiplication in a row, as is the case when raising to the Nth power.
 
 However, in some carefully chosen cases, we can make sure that the output is clean and predictable, then exploit it with integer overflows. Let's take the product of 129 by itself. It's hard to do in my head, but gets much easier when I see the binary decomposition :
 
@@ -189,7 +189,7 @@ By working with such numbers, we can craft special powers that will be predictab
 
 The leftmost bit does not fit in the 64 bits allocated, so it is discarded. This does not trigger the overflow check because the result is greater than the first operand.
 
-We end up with an interesting result, which is that (2^33 + 1) ^ 2 = (2^34 + 1) when it overflows. This property is global : we have (2^N + 1) ^ 2 = (2^(N+1) + 1), given that N ≥ 32 (otherwise the result is too small and the overflow doesn't happen) and N < 63 (otherwise the middle bit also overflows).
+We end up with an interesting result, which is that (2^33 + 1) ^ 2 = (2^34 + 1) when it overflows. This property is global : we have (2^N + 1) ^ 2 = (2^(N+1) + 1), given that N ≥ 32 (otherwise the result is too small and the overflow doesn't happen) and N < 63 (otherwise the middle bit also overflows). Of course, this property is only valid in an arithmetic in which numbers can overflow.
 
 Recursively, we also have
 
@@ -201,13 +201,15 @@ and so on.
 
 ### Closing the deal
 
-Let's get back to the inital problem. In order to verify the equation A^N + B^N = C^N, we could pick C in the form (2^K + 1) with 32≤K≤62 and N as a power of 2, let's say N = 2^M. Then we can apply the previous property and have C^N be in the form of (2^(K+M) + 1).
+Let's get back to the inital problem. In order to verify the equation A^N + B^N = C^N, we could pick C in the form (2^K + 1) with 32≤K≤62 and N as a power of 2, let's write it as N = 2^M.
+
+Then we can apply the previous property and have C^N be in the form of (2^(K+M) + 1).
 
 We can then choose A such that A^N = 2^(K+M) and B = 1, and we will have a correct solution to the equation.
 
 The hardest part is finding a good candidate for A. The value of M is constrained by 32≤K+M≤62, otherwise the above property would not be conserved. Having K strongly constrained as well between 32 and 62, we can search exhaustively for candidates of A in each possible value of (K,M).
 
-It turns out there are only 3 candidates for this strategy. We pick any and submit it :
+It turns out there are only 3 candidates. We pick any and submit it :
 
 ```
 $ nc 35.195.26.244 1337
@@ -216,6 +218,6 @@ $ nc 35.195.26.244 1337
 SaF{You_should_have_been_faster!_https://etherscan.io/tx/0x4249377e6f654d6c814c2ae1390a60e5133b68ce772c7e04ee7644972e56d9e5}
 ```
 
-And there we get the flag ! It took me around 30 minutes to solve this challenge, which is a time I'm really proud of. My actual solution involved less mathematical analysis and more bruteforcing than this article shows, but the idea was the same :)
+And there we get the flag ! It took me around 30 minutes to solve this challenge, which is a time I'm really proud of. My actual solution involved less mathematical analysis and more bruteforcing than this article shows, but the idea was the same :) I'm sure there were a lot of other strategies to solve the challenge, and that's why I loved it : simple problem, but many complex solutions.
 
 With only this flag after 10 hours of competition, my team took 6th place in the CTF, and slowly moved down to 16th place as other teams got more flags.
