@@ -104,6 +104,9 @@ I really liked this problem, it combined two interesting algorithmic notions wit
 
 I'm glad I could (barely) make it into the top 500 and win the competition's T-shirt, please make sure you follow me and retweet my article so you can enter the raffle :)
 
+<blockquote class="twitter-tweet" data-lang="fr"><p lang="en" dir="ltr">Made it to the world top 500 !<br><br>Here&#39;s my article on Facebook Hacker Cup round 2 : <a href="https://t.co/3uIQpjUlfm">https://t.co/3uIQpjUlfm</a><br><br>I already have the T-shirt from last year and don&#39;t need another, FOLLOW + RT for a chance to win this year&#39;s T-shirt :) <a href="https://t.co/uBwdn2NW0Q">pic.twitter.com/uBwdn2NW0Q</a></p>&mdash; Mathis Hammel (@MathisHammel) <a href="https://twitter.com/MathisHammel/status/1151453728727273473?ref_src=twsrc%5Etfw">17 juillet 2019</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 ## Bonus : my code
 
 If you're interested in seeing what my solution looks like, here it is. I haven't touched it since the round so it's dirty and uncommented, but I guess you can maybe learn something from it.
