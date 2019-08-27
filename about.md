@@ -4,15 +4,16 @@ title: About
 permalink: /about/
 ---
 
-Hi !
-I run this small website in French and English to share some personal experiences and solutions to problems that I find interesting in the various competitions I play. I often rank in the french top 10 in programming contests and computer security competitions (CTFs), but I'm always striving for improvement !
+We're a startup based in Paris, specialized in running custom-made technical competitions in coding and cybersecurity. As competitions enthusiasts, we thrive to design innovative contests and always keep our challengers on edge.
 
-### More Information
+Many of our contests are made for our community, and accessible to everyone. We also organize private competitions for companies, to help reach your recruitment objectives in no time or to challenge your technical teams. Get in touch with us at contact@h25.io !
 
-I am currently not open to new professional opportunities, but feel free to try your luck on LinkedIn if you believe you have the 1-in-a-million offer.
+This blog is the space where we post interesting problems and solutions we made or found while playing competitions. This website is mostly run by our co-founder Mathis Hammel ([@MathisHammel](https://twitter.com/MathisHammel) on Twitter) 
 
-For now, I run a small freelance structure together with my brother Clément, we provide technical consulting and organization for competitions of any kind.
+### Contact us
 
-### Contact me
+E-mail : [contact@h25.io](mailto:contact@h25.io)
 
-[@MathisHammel](https://twitter.com/MathisHammel) on Twitter
+Twitter : [@h25io](https://twitter.com/h25io)
+
+LinkedIn : [linkedin.com/company/h25io](https://www.linkedin.com/company/h25io)
