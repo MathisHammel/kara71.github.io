@@ -11,7 +11,6 @@ Here's how to make your own. First, install the following pip dependencies:
 
 ```bash
 pip install python-twitter matplotlib
-
 ```
 
 Now we can import the libraries in Python. Like all data visualization applications, I recommend using a Jupyter notebook.
@@ -21,11 +20,9 @@ from matplotlib_venn_wordcloud import venn3_wordcloud
 from matplotlib_venn import venn3, venn3_circles
 import matplotlib.pyplot as plt
 import twitter
-
 ```
 
 The first step will be setting up the Twitter API to fetch follower lists. For this, you will need to [generate an access token](https://developer.twitter.com/en/docs/basics/authentication/guides/access-tokens.html).
-
 
 ```
 API_KEY = 'TmljZSB0cnkgYnV0IG5v'
@@ -62,7 +59,6 @@ for text in out.subset_labels:
     text.set_fontsize(34)
     
 plt.title('Follower set size', fontsize=24)
-
 ```
 
 Matplotlib offers a lot of options to customize the diagrams, feel free to play with the settings to get a cool render!
@@ -77,7 +73,6 @@ You will simply need another dependency built on top of Matplotlib, which displa
 
 ```bash
 pip install matplotlib_venn_wordcloud
-
 ```
 
 The code is very similar to previously:
@@ -91,7 +86,6 @@ out = venn3_wordcloud([set(user.screen_name for user in followers_list) for foll
 for text in out.set_labels:
     text.set_fontsize(34)
 plt.title('Follower set size', fontsize=24)
-
 ```
 
 Now, it's time for you to get creative, and build something cool with this. Send us your creations on Twitter!
