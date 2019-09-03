@@ -44,7 +44,6 @@ TARGETS = ['MathisHammel', 'h25io', 'clement_hammel']
 followers_lists = []
 for target_acc in TARGETS:
     followers_lists.append(twapi.GetFollowers(screen_name=target_acc))
-	
 ```
 
 You can play a bit with the user objects contained in `followers_lists`, they gather a lot of informations on each of the users fetched. Now, let's generate the viz:
