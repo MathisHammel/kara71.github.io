@@ -416,7 +416,7 @@ Final solution space has size 1
 After about 3 seconds of processing time, we got it! The solution is unique, this must be the flag (and there is one check that we didn't even use). Print the flag and submit it, and bingo!
 
 ```
->>> 'TWCTF{%s}' % ''.join(correct_a_b_cnt_candidates[0])
+>>> 'TWCTF{' + ''.join(correct_a_b_cnt_candidates[0]) + '}'
 'TWCTF{df2b4877e71bd91c02f8ef6004b584a5}'
 ```
 
