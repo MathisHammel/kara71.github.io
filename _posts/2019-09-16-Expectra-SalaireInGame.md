@@ -34,9 +34,9 @@ L'algo s'exécute dans son coin pendant une petite minute avant de planter sur l
 
 ## Problème 2
 
-Le second exercice traite encore de hashing. On doit retrouver un code secret généré entre deux instants donnés séparés d'environ 24h. On sait que ce code correspond au md5 de l'instant où il a été généré au format `YYMMDDhhmmss`. On sait aussi que les 4 premiers caractères du code sont égaux au 4 derniers.
+Le second exercice traite encore de hashing. On doit retrouver un code secret généré entre deux instants donnés séparés d'environ 24h. On sait que ce code correspond au md5 du moment où il a été généré, en utilisant le format `YYMMDDhhmmss`. On sait aussi que les 4 premiers caractères du code sont égaux au 4 derniers.
 
-Je me lance encore sur un petit script, en rétrospective il aurait été plus élégant de partir sur des objets `datetime` avec `strftime`, mais je n'avais plus la doc par coeur et j'avais peur d'y perdre trop de temps.
+Je me lance encore sur un petit script, en rétrospective il aurait été plus élégant de partir sur des objets `datetime` avec `strftime` pour la conversion en string, mais je n'avais plus la doc par coeur et j'avais peur d'y perdre trop de temps.
 
 ```python
 import hashlib
@@ -86,7 +86,7 @@ print(prevline[100])
 
 Heureusement que j'utilisais python et ses entiers de taille infinie, car la réponse `45274257328051640582702088538742081937252294837706668420660` aurait fait pâlir les amateurs de C++ et de Java.
 
-L'autre solution était d'évaluer [ncr(199,99) sur WolframAlpha](https://www.wolframalpha.com/input/?i=ncr%28199%2C+99%29), mais encore fallait-il comprendre que c'était 199,99 et non 200,100...
+L'autre solution était d'évaluer [ncr(199,99) sur WolframAlpha](https://www.wolframalpha.com/input/?i=ncr%28199%2C+99%29), mais encore fallait-il voir que c'était 199,99 et non 200,100...
 
 ## Problème 4
 
@@ -104,13 +104,13 @@ for c in 'abcdefghijklmnopqrst':
 print(flag)
 ```
 
-La chaîne de sortie est `JOURNEE[DEV[EXPECTRA`, les espaces sont remplacés par des crochets car c'est le caractère qui vient après Z dans la table ASCII.
+La chaîne de sortie est `JOURNEE[DEV[EXPECTRA`, les espaces sont remplacés par des crochets car c'est le caractère qui vient après Z dans la table ASCII. On valide l'exercice sans difficulté, malgré deux erreurs dans l'énoncé (la correspondance était 100=a et non 101=A).
 
 ## Problème 5
 
 Le dernier problème est similaire au précédent, mais il faut cette fois-ci faire la transformation inverse, et ne pas faire le mélange. Pour valider le dernier exercice, il faudra donc transformer la chaîne `expectra`.
 
-J'aurais pu utiliser le fait que la chaîne `expectra` apparaissait dans le challenge précédent, mais on peut faire beaucoup plus simple from scratch :
+On aurait pu aussi utiliser le fait que la chaîne `expectra` apparaissait dans le challenge précédent, mais on peut faire beaucoup plus simple from scratch :
 
 ```python
 res=''
@@ -125,6 +125,6 @@ Après avoir soumis la dernière question, on m'annonce mon score final de 25 mi
 
 ![img scoreboard]({{ site.baseurl }}/images/2019-09-expectra/scoreboard.png)
 
-Mon intuition à propos des meilleurs joueurs s'est donc confirmée, j'ai joué un peu seul en tête en finissant le concours deux fois plus rapidement que le 2ème du classement. Mais restons modeste sur ce classement, je peux trouver une petite dizaine de français qui auraient fait la moitié de mon temps à moi ! (bonjour à Jérémy [@jebouin](https://twitter.com/jebouin) et Guillaume [@gaubian](https://twitter.com/gaubian) s'ils me lisent)
+Mon intuition à propos des meilleurs joueurs s'est donc confirmée, j'ai joué un peu seul en tête en finissant le concours deux fois plus rapidement que le 2ème du scoreboard. Mais restons modeste sur ce classement, je peux trouver une dizaine de français qui auraient fait la moitié de mon temps à moi ! (bonjour à Jérémy [@jebouin](https://twitter.com/jebouin) et Guillaume [@gaubian](https://twitter.com/gaubian) s'ils me lisent)
 
-Merci Expectra pour l'orga et les 16000 euros (si seulement) et féliciter mes concurrents pour leur belle performance, c'était serré dans le reste du top 5 !
+Merci Expectra pour l'orga et les 16000 euros (hahaha non), et bravo à mes concurrents pour leur belle performance: c'était serré dans le reste du top 5 !
