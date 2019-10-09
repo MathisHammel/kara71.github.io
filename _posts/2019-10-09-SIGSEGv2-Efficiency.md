@@ -33,6 +33,8 @@ Le main se contente de lire 20 caractères dans l'entrée standard, et envoie ce
 
 ![img checkerflow]({{ site.baseurl }}/images/2019-10-SIGSEGv2-Efficiency/checkerflow.png)
 
+(Il y a 14 *if* imbriqués en tout)
+
 ![img checkerflow2]({{ site.baseurl }}/images/2019-10-SIGSEGv2-Efficiency/checkerflow2.png)
 
 On peut séparer cette fonction en sous-parties.
@@ -55,13 +57,13 @@ On constate que ces opérations servent à inverser la position des octets dans 
 
 Dans les architectures x64, qui utilisent le little endian, l'ordre des octets en mémoire n'est pas le même si l'on considère des int ou des char. Il faut donc inverser la position des octets pour retomber sur nos pattes lors d'une conversion de l'un à l'autre.
 
-La dernière ligne de l'initialisation va copier une longue section de mémoire dans une variable locale **v2**.
+Ensuite, la dernière ligne de l'initialisation va copier une longue section de mémoire dans une variable locale **v2**.
 
 ### Boucle d'exécution
 
 Ensuite, le programme entre dans une boucle infinie d'exécution. Il récupère d'abord les 3 valeurs successives v2\[ptr\], v2\[ptr + 1\] et v2\[ptr + 2\].
 
-En fonction de la valeur de v2\[ptr\], le programme va choisir (avec tous les *if* imbriqués) une fonction parmi 14 qui sera appelée avec les arguments v2\[ptr + 1\] et v2\[ptr + 2\]. Les experts en reverse auront reconnu un challenge typique de VM, où le programme du challenge a un format custom et s'exécute dans un interpréteur fait maison. C'est en quelque sorte du méta-assembleur !
+En fonction de la valeur de v2\[ptr\], le programme va choisir (avec tous les *if* imbriqués vus plus haut) une fonction parmi 14 qui sera appelée avec les arguments v2\[ptr + 1\] et v2\[ptr + 2\]. Les experts en reverse auront reconnu un challenge typique de VM, où le programme du challenge a un format custom et s'exécute dans un interpréteur fait maison. C'est en quelque sorte du méta-assembleur !
 
 Regardons de plus près quelques instructions à notre disposition :
 
@@ -73,7 +75,7 @@ Cette fonction compare les deux valeurs pointées par ses arguments, et met à j
 
 Si les deux valeurs sont égales, la variable ptr sera modifiée. Cela correspond à un jump conditionnel vers une autre instruction.
 
-Plusieurs autres instructions classiques sont implémentées, par exemple xor, add, exit. L'une des fonctions est cependant plus complexe que les autres :
+Plusieurs autres instructions classiques sont implémentées telles que xor, add ou exit. L'une des fonctions est cependant plus complexe que les autres :
 
 ![img sub_1207]({{ site.baseurl }}/images/2019-10-SIGSEGv2-Efficiency/sub_12c6.png)
  
@@ -81,7 +83,7 @@ Un oeil avisé saura reconnaître ici l'algorithme d'[exponentiation modulaire r
 
 ### Reconstruction du programme
 
-Une fois que toutes les instructions ont été identifiées, on peut passer au désassemblage du programme de la VM. On commence par récupérer le contenu de la section mémoire qui nous intéresse, c'est très simple avec IDAPython :
+Une fois que toutes les instructions ont été identifiées, on peut passer au désassemblage du programme de la VM. On commence par récupérer le contenu de la section mémoire qui nous intéresse, c'est très simple avec IDAPython par exemple :
 
 ```python
 prog = ' '.join(map(lambda b:b.encode('hex'), idc.GetManyBytes(0x2020, 0x180)))
@@ -114,7 +116,7 @@ for i in range(0, len(prog), 12):
     print(str(i//12).zfill(2), inst_map[instr].format(arg1=arg1, arg2=arg2))
 ```
 
-Le programme implémenté dans la VM est le suivant :
+On récupère le pseudocode suivant :
 
 ```
 00 mem[4] = 3
@@ -151,7 +153,7 @@ Le programme implémenté dans la VM est le suivant :
 31 jmp 2
 ```
 
-C'est un script très simple que l'on peut résumer en 5 conditions que les 5 blocs d'input doivent vérifier :
+C'est un script très simple que l'on peut résumer en 5 conditions que les blocs d'input doivent vérifier :
 
 ```
 pow(input_block[0], 65537, 348201767) == 19190605
@@ -163,7 +165,7 @@ pow(input_block[4], 65537, 428166631) == 195189490
 
 ### Résolution des conditions
 
-Afin de vérifier ces conditions, deux options s'offrent à nous. On pourrait tester les 2^32 valeurs possibles pour chaque bloc, ce qui prendrait environ 1h de calcul sur un bon CPU, avec un bruteforce intelligent qui élimine les caractère non-imprimables.
+Afin de vérifier ces conditions, deux options s'offrent à nous. On pourrait tester les 2^32 valeurs possibles pour chaque bloc, ce qui prendrait environ 1h de calcul sur un bon CPU avec un bruteforce intelligent qui élimine les caractères non-imprimables.
 
 ```python
 while pow(i, 65537, 348201767) != 19190605:
@@ -198,7 +200,7 @@ Et le résultat s'affiche instantanément :
 Block 0 : sigs
 Block 1 : egv{
 Block 2 : VM3d
-Block 3 : \_stu
+Block 3 : _stu
 Block 4 : ff!}
 ```
 
