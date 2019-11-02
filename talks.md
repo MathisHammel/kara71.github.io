@@ -24,6 +24,6 @@ Bordeaux, November 2nd 2019
 
 Talk given by [Mathis Hammel](https://twitter.com/MathisHammel), [Nicolas Bonfante](https://twitter.com/BonfanteNicolas) and [Hugo Delval](https://twitter.com/HugoDelval)
 
-Slides : [link]({{ site.baseurl }}/talks/PyCon_Slides_CTF.pdf)
+Slides : <a href="{{ site.baseurl }}/talks/PyCon_Slides_CTF.pdf" target="_blank">available here</a>
 
 Video : Coming soon !
