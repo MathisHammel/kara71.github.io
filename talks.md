@@ -12,6 +12,8 @@ Rouen, December 12th 2019
 
 Talk given by [Mathis Hammel](https://twitter.com/MathisHammel)
 
+---
+
 ## SIGSEGv2 - The Quantum Revolution
 
 Paris, November 30th 2019
@@ -20,7 +22,9 @@ Talk given by [Mathis Hammel](https://twitter.com/MathisHammel) and [Clément Ha
 
 **Slides : <a href="{{ site.baseurl }}/talks/SIGSEGv2_Slides_Quantum_Revolution.pdf" target="_blank">available here</a>**
 
-## PyConFR 2019 - Python Toolbox of the CTF Expert 
+## PyConFR 2019 - Python Toolbox of the CTF Expert
+
+---
 
 Bordeaux, November 2nd 2019
 
