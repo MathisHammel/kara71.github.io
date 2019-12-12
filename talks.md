@@ -12,6 +12,8 @@ Rouen, December 12th 2019
 
 Talk given by [Mathis Hammel](https://twitter.com/MathisHammel)
 
+**Slides : <a href="{{ site.baseurl }}/talks/NSD19_Cryptography_Gone_Wrong.pdf" target="_blank">available here</a>**
+
 ---
 
 ## SIGSEGv2 - The Quantum Revolution
@@ -32,4 +34,4 @@ Talk given by [Mathis Hammel](https://twitter.com/MathisHammel), [Nicolas Bonfan
 
 **Slides : <a href="{{ site.baseurl }}/talks/PyCon_Slides_CTF.pdf" target="_blank">available here</a>**
 
-Video : Coming soon !
+Video : Coming soon ! (January 2020)
