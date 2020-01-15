@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Solutions du round CodeForces Educational #80
+title: CodeForces Educational 80
 ---
 
 On se retrouve pour le premier post de l'année, avec un peu d'algo pour changer de tous les writeups de CTF !
