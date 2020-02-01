@@ -7,13 +7,15 @@ Cette semaine à l'occasion du FIC, j'ai participé à plusieurs CTFs avec l'éq
 
 Pour sa deuxième édition, le NorzhCTF était organisé par 4 étudiants de l'ENSIBS sur un environnement réaliste : le réseau d'une centrale nucléaire était simulé sur un Cyber Range, et le but était de pénétrer plusieurs couches de sécurité sans déclencher les sondes de sécurité du SI.
 
-Il y avait aussi quelques challenges dans un format plus standard sur lesquels j'ai passé une bonne partie de la soirée (étant une bille en pentest), en particulier le challenge "Quantum encryption" dont nous allons parler dans ce post. J'ai trouvé une solution originale que l'on pourra qualifier d'arnaque totale, absolument pas prévue par le créateur :)
+Il y avait aussi quelques challenges dans un format plus standard sur lesquels j'ai passé une bonne partie de la soirée (étant une bille en pentest), en particulier le challenge "Quantum encryption" dont nous allons parler dans ce post. J'ai trouvé une solution originale que l'on qualifiera d'arnaque totale, absolument pas prévue par le créateur :)
+
+Nous avons été la seule équipe à valider ce challenge de 350 points, même si la solution présentée ici fera dire même aux plus allergiques à la crypto que "la quantique c'est de l'eau".
 
 ## Sujet du challenge
 
-Vous l'aurez compris au titre, ce challenge de cryptographie portera sur de la technologie quantique. On nous donne un fichier chiffré, ainsi qu'un algorithme de chiffrement implémenté en langage OpenQASM, qui est le langage bas niveau utilisé pour les machines quantiques chez IBM.
+Vous l'aurez compris, ce challenge de cryptographie portera sur de la technologie quantique. On nous donne un fichier chiffré, ainsi qu'un algorithme de chiffrement implémenté en langage OpenQASM, qui est le langage bas niveau utilisé pour les machines quantiques chez IBM.
 
-Le but est bien évidemment d'inverser le processus de chiffrement pour retrouver le flag. Le code source est le suivant :
+Le but est bien évidemment de casser le processus de chiffrement pour retrouver le flag. Le code source est le suivant :
 
 ```
 // quantum encryption
@@ -54,7 +56,7 @@ Une visualisation de l'algorithme est fournie avec les sources du programme :
 
 ![img]({{ site.baseurl }}/images/2020-01-norzh/circuit.png)
 
-Ce programme prend 4 bits quantiques en entrée et produit 4 bits en sortie. Les seules opérations présentes sont des portes CNOT et Toffoli, ce qui signifie qu'il n'y a aucune superposition : les qubits se retrouvent donc réduits à des bits de valeur 0 ou 1 mais jamais les deux.
+Ce programme prend 4 bits quantiques en entrée et produit 4 bits en sortie. Les seules opérations présentes sont des portes CNOT et Toffoli, ce qui signifie que les qubits se retrouvent réduits à des bits de valeur 0 ou 1 sans jamais de superposition quantique.
 
 Pour chiffrer des messages, l'entrée est découpée en sous-parties de 4 bits qui seront chiffrées individuellement.
 
@@ -62,7 +64,7 @@ Pour chiffrer des messages, l'entrée est découpée en sous-parties de 4 bits q
 
 ## Solution attendue
 
-La solution attendue était de créer le circuit logique inverse, comme l'absence d'intrication quantique rend le programme réversible.
+La solution attendue était de créer le circuit logique inverse, car l'absence d'intrication quantique rend le programme réversible.
 
 Cette solution est présentée par [Baptiste "Creased" Moine](https://twitter.com/creased_), le concepteur du challenge lui-même, dans un article très complet que vous pourrez retrouver [ici](https://www.aperikube.fr/docs/norzhctf_2020/quantum/). Le circuit inverse donné par Baptiste est le suivant, il suffit de l'exécuter sur chaque bloc de 4 bits pour récupérer le flag :
 
@@ -70,7 +72,7 @@ Cette solution est présentée par [Baptiste "Creased" Moine](https://twitter.co
 
 ## Solution codebook
 
-Au lieu de créer un circuit inverse, on peut utiliser une faiblesse du cryptosystème : la taille des blocs n'est que de 4 bits donc on peut créer un mapping exhaustif de toutes les entrées possibles vers leurs sorties correspondantes. Comme les blocs sont traités séparément (à la manière d'un [ECB](https://fr.wikipedia.org/wiki/Mode_d%27op%C3%A9ration_(cryptographie)#Dictionnaire_de_codes_:_%C2%AB_Electronic_codebook_%C2%BB_(ECB))) et qu'il n'y a pas de clé, on peut reconstituer le codebook de chiffrement et l'inverser opur obtenir le codebook de déchiffrement.
+Au lieu de créer un circuit inverse, on peut utiliser une faiblesse du cryptosystème : la taille des blocs n'est que de 4 bits donc on peut créer un mapping exhaustif de toutes les entrées possibles vers leurs sorties correspondantes. Comme les blocs sont traités séparément (à la manière d'un [ECB](https://fr.wikipedia.org/wiki/Mode_d%27op%C3%A9ration_(cryptographie)#Dictionnaire_de_codes_:_%C2%AB_Electronic_codebook_%C2%BB_(ECB))) et qu'il n'y a pas de clé, on peut reconstituer le codebook de chiffrement et l'inverser pour obtenir le codebook de déchiffrement.
 
 On a 16 entrées possibles, et il suffit d'exécuter le programme sur chacune de ces entrées pour recréer le codebook. Dans l'exemple suivant, on sait qu'un chiffré 0011 proviendra forcément du bloc 1011 en clair (en supposant que la transformation est biijective).
 
@@ -92,7 +94,7 @@ Par exemple, le message hexadécimal `6666` pourra donner `0000` ou `AAAA`, mais
 
 Ici, le début du flag `454E` est traduite en `191A`. On peut donc déduire que le chiffrement transforme `4` -> `1`, `5` -> `9` et `E` -> `A`.
 
-En utilisant tout le format de flag `ENSIBS{...}`, il est possible de déduire 9 substitutions sur les 16. Il nous manque 7 substitutions, ce qui correspond à 7! = 5040 déchiffrements possibles. C'est là qu'intervient l'arnaque : on va générer les 5040 flags possibles et les regarder un par un !
+En utilisant tout le format de flag `ENSIBS{...}`, il est possible de déduire 9 substitutions sur les 16. Il nous manque 7 substitutions, ce qui correspond à 7! = 5040 codebooks de déchiffrement possibles. C'est là qu'intervient l'arnaque : on va générer les 5040 flags possibles et les regarder un par un !
 
 ```python
 import itertools
@@ -176,9 +178,9 @@ Flag : `ENSIBS{qu4ntUm_G4tEs_w1ThOU7_SuPErp0si71oN}`
 
 ## Conclusion
 
-C'est toujours très amusant de trouver un flag en contournant le design du challenge, et la dernière attaque présentée n'a même pas besoin d'avoir le code Qasm de chiffrement pour casser le flag !
+C'est toujours très amusant de trouver un flag en contournant le design du challenge, et on n'a même pas besoin du code Qasm contrairement à la solution attendue !
 
-Merci aux organisateurs du NorzhCTF pour tous les challenges de qualité, et en particulier Creased <a href="https://twitter.com/Creased_?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @Creased_</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+Merci aux organisateurs du NorzhCTF pour tous les challenges de qualité, et en particulier Creased qui a conçu la plupart des challenges qui ont occupé ma soirée <a href="https://twitter.com/Creased_?ref_src=twsrc%5Etfw" class="twitter-follow-button" data-show-count="false">Follow @Creased_</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 Et bravo à tous mes coéquipiers des Sogeti Aces of Spades qui ont décroché la 1re et 3e place sur le podium !
 
