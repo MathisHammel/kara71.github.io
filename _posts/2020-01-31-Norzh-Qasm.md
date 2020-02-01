@@ -182,4 +182,4 @@ Merci aux organisateurs du NorzhCTF pour tous les challenges de qualité, et en 
 
 Et bravo à tous mes coéquipiers des Sogeti Aces of Spades qui ont décroché la 1re et 3e place sur le podium !
 
-![img]({{ site.baseurl }}/images/2020-01-norzh/scoreboard.png)
+![img]({{ site.baseurl }}/images/2020-01-norzh/scoreboard.jpg)
