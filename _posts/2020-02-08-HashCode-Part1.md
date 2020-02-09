@@ -51,7 +51,7 @@ The answer is optimization. Our goal isn't to reach the perfect solution, but to
 Problems given during the Google Hash Code are often famous NP problems such as the TSP with a real-world application, but they are always disguised and the actual NP problem isn't easy to identify. In the previous editions, there have been problems such as:
 
 - [Organizing drone deliveries from warehouses to customers](https://storage.googleapis.com/coding-competitions.appspot.com/HC/2016/hashcode2016_qualification_task.pdf) (2016)
-- [Compiling gigabytes of source code across multiple servers](https://storage.googleapis.com/coding-competitions.appspot.com/HC/2019/hashcode2019_final_task.pdf] (2019 finals)
+- [Compiling gigabytes of source code across multiple servers](https://storage.googleapis.com/coding-competitions.appspot.com/HC/2019/hashcode2019_final_task.pdf) (2019 finals)
 - [Planning self-driving taxi courses](https://storage.googleapis.com/coding-competitions.appspot.com/HC/2018/hashcode2018_qualification_task.pdf) (2018)
 
 ---
@@ -78,7 +78,7 @@ As you can see, the solutions are extremely bad and would rank us at the bottom 
 
 The name of the Monte Carlo technique is a reference to a famous area in Monaco where a huge casino is located. Here, we will use a lot of randomness and hope that it brings us a good solution.
 
-The goal is to generate as many random solutions as possible, and only keep the best one only. With a high enough computing power this can yield some interesting results, but the Monte Carlo strategy is easily beaten by more advanced solutions.
+The goal is to generate as many random solutions as possible, and keep the best one only. With a high enough computing power this can yield some interesting results, but the Monte Carlo strategy is easily beaten by more advanced solutions.
 
 The bottleneck of execution time will often be the scoring algorithm, which will also need to be optimized for good Monte Carlo runs.
 
@@ -113,7 +113,7 @@ This is the most vague of all strategies, but also one that you should aim for. 
 
 TSP can be optimally solved for small instances. What if you divided your large dataset of cities into smaller local groups that you can solve, and stitched all the parts back together ?
 
-### Level 5 : Heaviy artillery
+### Level 5 : Heavy artillery
 
 This level is made for the Hash Code experts (who have probably fallen asleep by now), and it's pretty safe to say that you will be in the top 100 teams if you manage to implement this solution.
 
