@@ -181,7 +181,7 @@ Here are some other options you should explore :
 
 # Conclusion
 
-I hope you enjoyed this introduction to Google Hash Code. This was the first of a two-part article, the second half is coming shortly and will focus on the [2020 Hash Code practice round](https://hashcodejudge.withgoogle.com/#/rounds/4684107510448128/) that you can play if you're registered.
+I hope you enjoyed this introduction to Google Hash Code. This was the first of a two-part article, read part 2 [here]({{ site.baseurl }}/HashCode-Part1/) !
 
 If you are interested in participating in this year's Google Hash Code on Feb. 20, Sogeti is hosting seven hubs in France where you can come with your team and play alongside local rivals ! There will be pizza and prizes for the best teams in each hub, and registration is completely free ! Hubs are in the following cities :
 
