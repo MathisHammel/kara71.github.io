@@ -3,7 +3,9 @@ layout: post
 title: Solution au challenge de la CodeFest des Jeudis
 ---
 
-Le challenge est disponible à l'adresse suivante : [challenge.h25.io](https://challenge.h25.io)
+Cet article présente la solution de l'exercice 7 de la CodeFest, qui était un problème difficile d'algorithmique combinatoire et de mathématiques.
+
+L'énoncé du challenge est disponible à l'adresse suivante : [challenge.h25.io](https://challenge.h25.io)
 
 Il faut tout d'abord séparer les zones libres contiguës de la carte (celles composées de `.`), on peut éliminer les autres.
 
