@@ -24,7 +24,11 @@ La solution est potentiellement très grande avec la combinatoire, et deux optio
 
 On choisit la deuxième option pour plus de simplicité, ces entiers sont utilisés par défaut en Python et sont disponibles dans des bibliothèques standard en Java et JS.
 
-## Python
+Nous espérons que vous avez apprécié la compétition, malgré les problèmes rencontrés par la plateforme qui n'était pas gérée par h25.
+
+N'hésitez pas à nous suivre sur [Twitter](https://twitter.com/h25io) pour être tenus au courant de nos prochains challenges ! Nous sommes aussi en charge des exercices de la prochaine [Battle Dev](https://battledev.blogdumoderateur.com/) avec plus de 5000 développeurs, rendez-vous le 26 mars ;)
+
+## Solution Python
 
 ```python
 import itertools
@@ -46,7 +50,7 @@ def countEndgames(grid):
     return tot % (10**9+7)
 ```
 
-## Java
+## Solution Java
 
 ```java
 package myapp;
@@ -96,7 +100,7 @@ public class App
 }
 ```
 
-## Javascript
+## Solution Javascript
 
 ```javascript
 module.exports = function countEndgames(grid){
