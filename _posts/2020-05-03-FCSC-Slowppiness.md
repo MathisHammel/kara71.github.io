@@ -166,7 +166,8 @@ On peut donc comprendre que c'est une opération qui échange deux valeurs, mais
 [ 290852104,  484434820,  493492906,  555203089,
   653111410,  712694519,  797548889,  841426976,
  1710739839, 1954157709, 2636282546, 3154741035,
- 3174068582, 3359734628, 4042181011, 4191037080]```
+ 3174068582, 3359734628, 4042181011, 4191037080]
+ ```
  
 Il est donc désormais très simple de se passer de cet algorithme totalement inefficace, mais une dernière étape subsiste :
 
