@@ -201,13 +201,13 @@ Pour cette solution nous allons prendre une approche "bottom-up" : c'est à dire
 Le cas le plus petit est quand Smith a 0PV (-> quand on a gagné)
 Le contenu de chaque case correspond au nombre de manière d'arriver à cet état. On peut commencer à remplir les cases où Smith a 0 PV : il n'y a qu'une seule "manière" d'arriver à cet état. Les états où Noé a 0PV sont à 0 (aucun chemin gagnant ne passe par là).
 
-![animation]({{ site.baseurl }}/images/2021-salaireingame/ex5_1.png)
+![animation]({{ site.baseurl }}/images/2021-03-salaireingame/ex5_1.png)
 
 Ensuite, nous parcourons le tableau. Pour trouver le nombre de chemins passant par un état donné `chemins(pv_noé, pv_smith)`, il faut additionner `chemins(pv_noé - 2, pv_smith)`, `chemins(pv_noé - 5, pv_smith)`, et `chemins(pv_noé - 7, pv_smith)` : cette somme est le nombre de chemins où Noé vient d'être attaqué, menant à l'état `(pv_noé, pv_smith)`. Il faut également additionner l'équivalent pour les états où Smith vient de se faire attquer : `chemins(pv_noé, pv_smith - 2)`, ...
 
 Attention, si `pv_noé - 2` est négatif il faudra garder `0` : si un personnage perd tous ses PV après une attque, il aura ses PV a 0.
 
-![animation]({{ site.baseurl }}/images/2021-salaireingame/ex5_2.gif)
+![animation]({{ site.baseurl }}/images/2021-03-salaireingame/ex5_2.gif)
 
 La solution a donc une complexité de `O(PVmax Smith * PVmax Noé * Nombre d'attaques)`, ce qui donne une réponse en une fraction de seconde :
 
