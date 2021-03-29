@@ -207,7 +207,7 @@ Ensuite, nous parcourons le tableau. Pour trouver le nombre de chemins passant p
 
 Attention, si `pv_noé - 2` est négatif il faudra garder `0` : si un personnage perd tous ses PV après une attque, il aura ses PV a 0.
 
-![animation]({{ site.baseurl }}/images/2021-03-salaireingame/ex5_2.gif)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jSBpuj7lpmQ?controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 La solution a donc une complexité de `O(PVmax Smith * PVmax Noé * Nombre d'attaques)`, ce qui donne une réponse en une fraction de seconde :
 
