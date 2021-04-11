@@ -3,7 +3,7 @@ layout: post
 title: Midnight Flag CTF - Browser In Browser [Web 270]
 ---
 
-Ce weekend a eu lieu le Midnight Flag CTF, organisé par une école française à destination d'étudiants. Les challenges étaient de bonne qualité et sans trop de guessing, je n'ai pas particulièrement été mis en difficulté sur mes disciplines favorites, mais j'en ai du coup profité pour explorer les catégories que je maîtrise moins comme le web qui sera mis à l'honneur dans ce writeup du challenge Browser In Browser.
+Ce weekend a eu lieu le Midnight Flag CTF, organisé par une école française pour un public relativement débutant. Les challenges étaient de bonne qualité et sans trop de guessing, je n'ai pas particulièrement été mis en difficulté sur mes disciplines favorites, donc j'en ai du coup profité pour explorer les catégories que je maîtrise moins comme le web qui sera mis à l'honneur dans ce writeup du challenge Browser In Browser.
 
 ## Le challenge
 
