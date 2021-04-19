@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Midnight Flag CTF - Indicateur 2 Compromis [Crypto 335]
+title: Midnight Flag CTF - Something Missing [Crypto 335]
 ---
 
 Au lancement du Midnight Flag CTF, ce challenge était le dernier de la catégorie crypto (avant que le chall sur qiskit soit ajouté). On nous donnait un flag chiffré avec la fonction de chiffrement associée.
